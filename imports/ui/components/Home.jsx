@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import {createContainer} from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
-import { Message } from 'semantic-ui-react'
+import { Container, Grid } from 'semantic-ui-react'
 import Loading from './Loading';
+
+import NavigationBox from './NavigationBox';
 
 class Home extends Component{
   render(){
@@ -11,14 +13,16 @@ class Home extends Component{
     if(loginToken && !currentUser) return <Loading />
 
     return(
-      <Message>
-        <Message.Header>
-           { loginToken ? 'Welcome, '+ currentUser.profile.name : '' }
-        </Message.Header>
-        <p>
-          This is a test for meteor-react-semantic-ui boilerplate. You can now clone this and enjoy your project bulding with meteor-react-semantic-ui!!
-        </p>
-      </Message>
+      <Container>
+        <Grid>
+          <Grid.Column width={4} textAlign='center'>
+            <NavigationBox />
+          </Grid.Column>
+          <Grid.Column>
+            Test Feed
+          </Grid.Column>
+        </Grid>
+      </Container>
     );
   }
 }

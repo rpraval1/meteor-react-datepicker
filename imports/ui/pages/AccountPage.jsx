@@ -5,28 +5,34 @@ import { createContainer } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 
 import Landing from '../components/Landing';
-import Home from '../components/Home';
+import Accounts from '../components/Accounts';
 
-import { browserHistory } from 'react-router';
+
+
+import { Container } from 'semantic-ui-react'
+
 // import { Template } from 'meteor/templating';
 // import { Blaze } from 'meteor/blaze';
 //import { Accounts, STATES } from '../../../imports/startup/accounts-config.js';
 
 
 //create component
-class LandingPage extends Component {
+class AccountPage extends Component {
 
   render() {
 
     //console.log(this.props.currentUser);
     const { currentUser, children, loginToken } = this.props;
 
+    // if (!localStorage.getItem("Meteor.loginToken")) {
+    //   return <div>Loading...</div>;
+    // }
 
     return(
-      <div className="container">
-        { loginToken ? <Home /> : <Landing />
+      <Container>
+        { loginToken ? <Accounts /> : <Landing />
         }
-    </div>
+      </Container>
 
   );
 }
@@ -34,4 +40,4 @@ class LandingPage extends Component {
 
 export default createContainer(() => {
   return { currentUser: Meteor.user(), loginToken: localStorage.getItem("Meteor.loginToken")  };
-},LandingPage);
+},AccountPage);

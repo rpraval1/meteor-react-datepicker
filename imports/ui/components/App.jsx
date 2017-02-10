@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   render(){
-    this.base_url = "http://localhost:3000/";
+    this.base_url = "http://localhost:3002/";
 
     //console.log(this.base_url);
     return(

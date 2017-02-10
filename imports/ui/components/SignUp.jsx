@@ -9,7 +9,8 @@ class SignUp extends Component {
     this.state = {
       error: '',
       visible:false,
-      loading: false
+      loading: false,
+      formerror: false
     };
   }
 
@@ -20,14 +21,15 @@ class SignUp extends Component {
     Meteor.call('users.validate',{email:formData.email, username:formData.username}, function(error){
       if(error){
         //console.log(error.reason);
-        this.setState({error:error.reason, visible:true})
+        this.setState({error:error.reason, visible:true, formerror: true})
       }else{
         const { username, email, password, name } = formData
           //Meteor-method
           Accounts.createUser({username, email, password, profile:{name, pname:name}}, (err) => {
             if(err){
               this.setState({
-                error: err.reason
+                error: err.reason,
+                formerror: true
               });
             } else {
               browserHistory.push('/');
@@ -41,13 +43,14 @@ class SignUp extends Component {
   handleDismiss(){
     this.setState({ error: '',
     visible:false })
+
     // setTimeout(() => {
     //   this.setState({ visible: true })
     // }, 2000)
   }
 
   render(){
-    const {error,loading} = this.state;
+    const {error,loading, formerror} = this.state;
 
     return(
       <Container>
@@ -56,7 +59,7 @@ class SignUp extends Component {
           <Message.Header>{error}</Message.Header>
           <p>Please try again</p>
         </Message> : '' }
-        <Form onSubmit={this.handleSubmit.bind(this)} loading={loading}>
+        <Form onSubmit={this.handleSubmit.bind(this)} loading={loading} error={formerror}>
           <Form.Input name='email' label='Enter Email' required type='text'/>
           <Form.Input name='name' label='Enter Name' required type='text'/>
           <Form.Input name='username' label='Enter Username' required type='text'/>

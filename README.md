@@ -1,1 +1,2 @@
-# Meteor Semantic-ui React Boilerplate
+# StoryOf.MY
+## Write stories that matter to you
