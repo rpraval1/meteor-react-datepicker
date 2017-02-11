@@ -8,9 +8,7 @@ import Landing from '../components/Landing';
 import Home from '../components/Home';
 
 import { browserHistory } from 'react-router';
-// import { Template } from 'meteor/templating';
-// import { Blaze } from 'meteor/blaze';
-//import { Accounts, STATES } from '../../../imports/startup/accounts-config.js';
+
 
 
 //create component
