@@ -4,7 +4,7 @@ import { createContainer } from 'meteor/react-meteor-data'
 import { Button, Container, Message, Segment } from 'semantic-ui-react';
 import SignIn from '../components/SignIn';
 
-export default class SignInPage extends Component {
+class SignInPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -12,8 +12,15 @@ export default class SignInPage extends Component {
     };
   }
 
+  componentWillMount(){
+    if(this.props.loginToken){
+      browserHistory.push('/');
+    }
+  }
+
   render(){
     const error = this.state.error;
+
     return (
       <Container textAlign='center'>
         <Segment color='violet' size='big' padded='very' raised>
@@ -23,3 +30,7 @@ export default class SignInPage extends Component {
     );
   }
 }
+
+export default createContainer(() => {
+  return { currentUser: Meteor.user(), loginToken: localStorage.getItem("Meteor.loginToken")  };
+},SignInPage);

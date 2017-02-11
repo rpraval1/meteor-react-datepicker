@@ -4,12 +4,18 @@ import { createContainer } from 'meteor/react-meteor-data'
 import { Button, Container, Message, Segment } from 'semantic-ui-react';
 import SignUp from '../components/SignUp';
 
-export default class SignUpPage extends Component {
+class SignUpPage extends Component {
   constructor(props){
     super(props);
     this.state = {
       error: ''
     };
+  }
+
+  componentWillMount(){
+    if(this.props.loginToken){
+      browserHistory.push('/');
+    }
   }
 
   render(){
@@ -23,3 +29,8 @@ export default class SignUpPage extends Component {
     );
   }
 }
+
+
+export default createContainer(() => {
+  return { currentUser: Meteor.user(), loginToken: localStorage.getItem("Meteor.loginToken")  };
+},SignUpPage);

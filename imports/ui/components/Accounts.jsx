@@ -96,9 +96,7 @@ class Accounts extends Component{
           </Grid.Column>
           <Grid.Column stretched width={12}>
             <Segment>
-              <div ref="accountsContent">
-                  {pageContent}
-              </div>
+                {pageContent}
             </Segment>
           </Grid.Column>
         </Grid>

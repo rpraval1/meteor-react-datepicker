@@ -12,7 +12,7 @@ const NavigationBox = (props) => {
         <div>
             <span className="shadow-effect">
                <a href="#">
-                   <img src="http://localhost:3002/img/features/story-bug-logo.png" alt="" />
+                   <img src="/img/features/story-bug-logo.png" alt="" />
                    <span>
                        StoryBuds&trade;
                    </span>
@@ -20,7 +20,7 @@ const NavigationBox = (props) => {
             </span>
             <span className="shadow-effect">
                 <a href="#">
-                    <img src="http://localhost:3002/img/features/story-tag-logo.png" alt="" />
+                    <img src="/img/features/story-tag-logo.png" alt="" />
                     <span>
                        StoryTags&trade;
                    </span>
@@ -30,7 +30,7 @@ const NavigationBox = (props) => {
         <div>
             <span className="shadow-effect">
                <a href="#">
-                   <img src="http://localhost:3002/img/features/messages.png" alt="" />
+                   <img src="/img/features/messages.png" alt="" />
                    <span>
                        Messages
                    </span>
@@ -38,7 +38,7 @@ const NavigationBox = (props) => {
             </span>
             <span className="shadow-effect">
                 <a href="#">
-                    <img src="http://localhost:3002/img/features/saved-stories.png" alt="" />
+                    <img src="/img/features/saved-stories.png" alt="" />
                     <span>
                        Saved Stories
                    </span>

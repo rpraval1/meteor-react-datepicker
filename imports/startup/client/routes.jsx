@@ -15,6 +15,7 @@ export const renderRoutes = () => (
     <Route path='/' component={App}>
       <IndexRoute component={LandingPage} />
       <Route path="signin" component={SignInPage}/>
+      <Route path="/#/verify-email" component={SignInPage}/>
       <Route path="signup" component={SignupPage}/>
       <Route path="account" component={AccountPage}/>
       // <Route path="/signin" component={() => <Accounts.ui.LoginForm />} />
