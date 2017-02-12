@@ -82,18 +82,20 @@ if (Meteor.isServer) {
             else
               userValidation = true
 
-
-            //Add Roles...
-            //Roles.addUsersToRoles(userId, ['manage-roles','manage-users','view-all'], 'super-admin')
-
-            //Send Account Verification....
-            Accounts.sendVerificationEmail(user);
-
             return userValidation
 
           });
 
+          //Create account
+          const userOut = Accounts.createUser({
+            username, email, password, profile:{name, pname:name}
+          });
 
+          //Add Roles...
+          //Roles.addUsersToRoles(userId, ['manage-roles','manage-users','view-all'], 'super-admin')
+
+          //Send Account Verification....
+          Accounts.sendVerificationEmail(userOut);
 
         },
 
