@@ -57,20 +57,43 @@ if (Meteor.isServer) {
 
 
       Meteor.methods({
-        'users.create': function(user){
+        'users.create': function(userIn){
           //Account create on server...
-          const { username, email, password, name } = user
-          //Create account
-          const userId = Accounts.createUser({
-            username, email, password, profile:{name, pname:name}
+          const { username, email, password, name } = userIn
+
+
+
+          Accounts.validateNewUser( (user) => {
+            let userValidation = false;
+
+            //Validate Username
+            if(user.username.length >= 4 &&
+               user.username.length <= 16 &&
+               user.username !== 'root' &&
+               user.username !== 'admin') {
+              userValidation = true
+            } else {
+              throw new Meteor.Error(403, 'Invalid username. Sorry!')
+            }
+            //console.log(userIn.password.length);
+            //Validate Password
+            if(userIn.password.length < 8)
+              throw new Meteor.Error(403, "Password Length should be at least 8.");
+            else
+              userValidation = true
+
+
+            //Add Roles...
+            //Roles.addUsersToRoles(userId, ['manage-roles','manage-users','view-all'], 'super-admin')
+
+            //Send Account Verification....
+            Accounts.sendVerificationEmail(user);
+
+            return userValidation
+
           });
 
 
-          //Add Roles...
-          //Roles.addUsersToRoles(userId, ['manage-roles','manage-users','view-all'], 'super-admin')
-
-          //Send Account Verification....
-          Accounts.sendVerificationEmail(userId);
 
         },
 
