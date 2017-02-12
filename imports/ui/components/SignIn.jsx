@@ -27,9 +27,9 @@ class SignIn extends Component {
           visible:false
         });
       } else {
-        browserHistory.push('/');
+        browserHistory.push('/home');
       }
-      this.setState({loading:false})
+
     });
   }
 
@@ -42,7 +42,7 @@ class SignIn extends Component {
     // }, 2000)
   }
 
-  
+
 
   render(){
     const {error,loading} = this.state;

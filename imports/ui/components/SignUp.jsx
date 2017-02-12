@@ -20,7 +20,7 @@ class SignUp extends Component {
     //validate
     Meteor.call('users.create',formData, function(error){
       if(error){
-        console.log(error.reason);
+        //console.log(error.reason);
         this.setState({error:error.reason, visible:true, formerror: true})
       } else {
         browserHistory.push('/signin');

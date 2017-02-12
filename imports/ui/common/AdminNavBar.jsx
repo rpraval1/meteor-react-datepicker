@@ -7,13 +7,12 @@ import { browserHistory } from 'react-router';
 import Loading from './NavLoading';
 
 //create component
-class NavBar extends Component{
+class AdminNavBar extends Component{
   constructor(props) {
     super(props);
 
     this.state = {
-      activeItem:"",
-      isUserAdmin: false
+      activeItem:""
     }
 
     this.logout = this.logout.bind(this);
@@ -30,43 +29,11 @@ class NavBar extends Component{
     browserHistory.push('/');
   }
 
-  // componentDidMount(){
-  //   Meteor.call('isAdmin', (err, isUserAdmin) => {
-  //     if(err) {
-  //       // Handle error
-  //       console.log(err);
-  //     }
-  //     else {
-  //       this.setState({
-  //           isUserAdmin
-  //       })
-  //       console.log('componentDidMount: admin menu should have been re-rendered');
-  //     }
-  //   });
-  // }
-
-  componentWillReceiveProps(){
-    //if(this.props != nextProps)
-    Meteor.call('isAdmin', (err, isUserAdmin) => {
-      if(err) {
-        // Handle error
-        console.log(err);
-      }
-      else {
-        this.setState({
-          isUserAdmin
-        })
-      }
-    });
-
-  }
-
 
   render(){
-    const { currentUser, children, base_url, loginToken} = this.props;
-    const {activeItem, isUserAdmin} = this.state;
+    const { currentUser, children, base_url, loginToken,allUsers} = this.props;
+    const {activeItem} = this.state;
     let trigger = '';
-    let adminTrigger = '';
 
     if(loginToken && !currentUser) return <Loading />
     else if(loginToken && currentUser)
@@ -77,20 +44,8 @@ class NavBar extends Component{
             Hello, {currentUser.profile.name}
           </span>
         );
-
-      adminTrigger = (
-          <span>
-            <Icon name='spy' />
-            Admin
-          </span>
-        );
-
     }
 
-    // 
-    // <Menu.Item>
-    //   <Input icon='search' placeholder='Search...' />
-    // </Menu.Item>
   return(
     <div>
       { loginToken ?
@@ -99,24 +54,14 @@ class NavBar extends Component{
             <img src="/img/logo.png" width="30" height="30" className="d-inline-block align-top " alt="" />
             STORYOF.MY
           </Menu.Item>
-          <Menu.Item href={Meteor.absoluteUrl()} name='Home' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
+          <Menu.Item href={`${base_url}`} name='Home' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
           <Menu.Item name='Messsages' active={activeItem === 'messages'} onClick={this.handleItemClick.bind(this)} />
-        <Menu.Menu position='right'>
-            {isUserAdmin ?
-              <Menu.Item >
-                <Dropdown trigger={adminTrigger}>
-                  <Dropdown.Menu className="user-dropdown">
-                    <Dropdown.Item disabled>
-                      Signed in as <strong>Admin</strong>
-                    </Dropdown.Item>
-                    <Dropdown.Divider />
-                    <Dropdown.Item href={Meteor.absoluteUrl('manage/users')}>Manage Users</Dropdown.Item>
-                    <Dropdown.Item href={Meteor.absoluteUrl('manage/roles')}>Manage Roles</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-              </Menu.Item>
-            : null}
+          <Menu.Item name='Admin' active={activeItem === 'admin'} onClick={this.handleItemClick.bind(this)} />
 
+          <Menu.Menu position='right'>
+            <Menu.Item>
+              <Input icon='search' placeholder='Search...' />
+            </Menu.Item>
             <Menu.Item>
               <Dropdown trigger={trigger}>
                 <Dropdown.Menu className="user-dropdown">
@@ -124,11 +69,11 @@ class NavBar extends Component{
                     Signed in as <strong>{currentUser.username}</strong>
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item href={Meteor.absoluteUrl('account')}>Your Account</Dropdown.Item>
+                  <Dropdown.Item href={`${base_url}account`}>Your Account</Dropdown.Item>
                   <Dropdown.Item>Integrations</Dropdown.Item>
                   <Dropdown.Item>Help</Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item href={Meteor.absoluteUrl('settings')}>Settings</Dropdown.Item>
+                  <Dropdown.Item href={`${base_url}settings`}>Settings</Dropdown.Item>
                   <Dropdown.Item onClick={this.logout.bind(this)}>Sign Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
@@ -160,10 +105,15 @@ class NavBar extends Component{
 
 export default createContainer(() => {
 
+  //Lets subscribe to check if user is admin
+  Meteor.subscribe('get-all-users');
+
+
 
   return {
     currentUser: Meteor.user(),
+    allUsers: Meteor.users.find({}).fetch(),
     loginToken: localStorage.getItem("Meteor.loginToken")
   };
 
-},NavBar);
+},AdminNavBar);
