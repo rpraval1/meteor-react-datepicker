@@ -1,2 +1,2 @@
 
-process.env.MAIL_URL = "smtp://postmaster%40thoughtlinks.co:1d03ec2a252b4af3ac59445d3a6224bf@smtp.mailgun.org:587";
+process.env.MAIL_URL = "smtp://postmaster%40mg.storyof.my:87979f292357d8ad8f7928f2ffad6c2b@smtp.mailgun.org:587";

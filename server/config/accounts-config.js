@@ -75,7 +75,7 @@ if (Meteor.isServer) {
             } else {
               throw new Meteor.Error(403, 'Invalid username. Sorry!')
             }
-            //console.log(userIn.password.length);
+            console.log(userIn.password.length);
             //Validate Password
             if(userIn.password.length < 8)
               throw new Meteor.Error(403, "Password Length should be at least 8.");
