@@ -87,7 +87,7 @@ class NavBar extends Component{
 
     }
 
-    // 
+    //
     // <Menu.Item>
     //   <Input icon='search' placeholder='Search...' />
     // </Menu.Item>
@@ -95,12 +95,10 @@ class NavBar extends Component{
     <div>
       { loginToken ?
         <Menu className="navbar">
-          <Menu.Item>
-            <img src="/img/logo.png" width="30" height="30" className="d-inline-block align-top " alt="" />
-            STORYOF.MY
+          <Menu.Item href={Meteor.absoluteUrl()}>
+            BulletinBoard
           </Menu.Item>
-          <Menu.Item href={Meteor.absoluteUrl()} name='Home' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
-          <Menu.Item name='Messsages' active={activeItem === 'messages'} onClick={this.handleItemClick.bind(this)} />
+          <Menu.Item href={Meteor.absoluteUrl('myboards')} name='MyBoards' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
         <Menu.Menu position='right'>
             {isUserAdmin ?
               <Menu.Item >
@@ -139,8 +137,7 @@ class NavBar extends Component{
          :
          <Menu className="navbar">
            <Menu.Item>
-             <img src="/img/logo.png" width="30" height="30" className="d-inline-block align-top " alt="" />
-             STORYOF.MY
+             BulletinBoard
            </Menu.Item>
            <Menu.Menu position='right'>
          <Menu.Item href='/signup' name='signup' active={activeItem === 'signup'} onClick={this.handleItemClick.bind(this)}>

@@ -3,25 +3,19 @@ import {createContainer} from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import { Container, Grid } from 'semantic-ui-react'
 import Loading from './Loading';
-
-import NavigationBox from './NavigationBox';
+import AddBoard from './AddBoard';
 
 class Home extends Component{
+
+
   render(){
     const { currentUser, loginToken } = this.props
 
     if(loginToken && !currentUser) return <Loading />
 
     return(
-      <Container>
-        <Grid>
-          <Grid.Column width={4} textAlign='center'>
-            <NavigationBox />
-          </Grid.Column>
-          <Grid.Column>
-            Test Feed
-          </Grid.Column>
-        </Grid>
+      <Container fluid>
+        <AddBoard />
       </Container>
     );
   }

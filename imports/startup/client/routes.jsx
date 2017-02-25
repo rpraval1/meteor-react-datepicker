@@ -6,6 +6,7 @@ import App from '../../ui/components/App.jsx'
 
 // Pages
 import SignupPage from '../../ui/pages/SignUpPage.jsx';
+import MyBoardsPage from '../../ui/pages/MyBoardsPage.jsx';
 import SignInPage from '../../ui/pages/SignInPage.jsx';
 import LandingPage from '../../ui/pages/LandingPage';
 import AccountPage from '../../ui/pages/AccountPage';
@@ -16,6 +17,7 @@ export const renderRoutes = () => (
   <Router history={browserHistory} >
     <Route path='/' component={App}>
       <IndexRoute component={LandingPage} />
+      <Route path="myboards" component={MyBoardsPage}/>
       <Route path="signin" component={SignInPage}/>
       <Route path="signup" component={SignupPage}/>
       <Route path="account" component={AccountPage}/>
