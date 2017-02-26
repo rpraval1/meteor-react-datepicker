@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Menu } from 'semantic-ui-react'
-import NoteColor from './NoteColor'
+import { Icon, Menu, Segment } from 'semantic-ui-react'
 
 class AddNote extends Component {
 
@@ -27,21 +26,35 @@ class AddNote extends Component {
     }
   }
 
-  // getNoteColor(noteInputColor){
-  //   this.props.getNoteColorValue(noteInputColor)
-  // }
+  getNoteColor(noteInputColor){
+    this.props.getNoteColorValue(noteInputColor)
+  }
 
+  renderColor() {
+    const {loadColor} = this.state
+    const colors = ['pink', 'teal', 'olive', 'yellow']
+
+    if(loadColor){
+      return (
+        colors.map(color => (
+          <Menu.Item>
+            <Segment inverted color={color} onClick={this.getNoteColor.bind(this,color)} ></Segment>
+          </Menu.Item>
+        ))
+      )
+    }
+  }
 
   render(){
 
-    const {activeItem,loadColor} = this.state
-    //const {noteColorValue} = this.props
+    const {activeItem, loadColor} = this.state
+    const {boardContent} = this.props
     return (
         <Menu inverted borderless className='addNote'>
           <Menu.Item name='plus' active={activeItem === 'plus'} onClick={this.handleItemClick.bind(this)} >
             {loadColor ? <Icon name='minus'></Icon> : <Icon name='plus'></Icon>}
           </Menu.Item>
-          <NoteColor loadColor={loadColor}/>
+          {this.renderColor()}
         </Menu>
     );
   }

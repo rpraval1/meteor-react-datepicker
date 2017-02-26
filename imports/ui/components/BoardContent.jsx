@@ -13,18 +13,15 @@ class BoardContent extends Component {
   //   }
   // }
   //
-  // getNoteColorValue(noteInputColor){
-  //   this.setState({
-  //     noteColorValue: noteInputColor
-  //   })
-  // }
+
 
   render (){
-    const {boardContent} = this.props
+    const {boardContent, noteColorValue} = this.props
     //const {noteColorValue} = this.state
     return (
       <Container fluid className='boardContent'>
         <h1>{boardContent}</h1>
+        <h1>{noteColorValue}</h1>
       </Container>
     );
   }

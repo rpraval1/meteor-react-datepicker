@@ -25,7 +25,9 @@ class AddBoard extends Component {
 
     this.state = {
       modalOpen: false,
-      boardContent: ''
+      boardContent: '',
+      noteColorValue: '',
+      defaultColor: ''
     }
   }
 
@@ -38,6 +40,12 @@ class AddBoard extends Component {
   boardContentValue(boardClickedVaue){
     this.setState({
       boardContent: boardClickedVaue
+    })
+  }
+
+  getNoteColorValue(noteInputColor){
+    this.setState({
+      noteColorValue: noteInputColor
     })
   }
 
@@ -61,7 +69,7 @@ class AddBoard extends Component {
   //   <Icon name='plus'></Icon>
   render() {
 
-    const {modalOpen, boardContent} = this.state
+    const {modalOpen, boardContent, noteColorValue} = this.state
 
     return(
       <Container fluid>
@@ -87,8 +95,8 @@ class AddBoard extends Component {
           <MyBoardsList boardContent={boardContent} boardContentValue={this.boardContentValue.bind(this)}/>
         </Menu>
         <Segment attached='bottom'>
-          <BoardContent boardContent={boardContent}/>
-          {boardContent ? <AddNote /> : ''}
+          <BoardContent boardContent={boardContent} noteColorValue={noteColorValue} />
+          {boardContent ? <AddNote boardContent={boardContent} noteColorValue={noteColorValue} getNoteColorValue={this.getNoteColorValue.bind(this)}/> : ''}
         </Segment>
       </Container>
     );
