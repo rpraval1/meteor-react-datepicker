@@ -2,6 +2,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check'
+import {Boards} from '../../imports/collections/Boards';
 
 if (Meteor.isServer) {
 
@@ -45,6 +46,10 @@ if (Meteor.isServer) {
     }
     this.stop();
     return;
+  });
+
+  Meteor.publish('boards', function() {
+    return Boards.find({ownerId: this.userId});
   });
 
 

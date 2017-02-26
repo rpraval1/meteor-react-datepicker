@@ -19,7 +19,7 @@ class NoteColor extends Component {
     }
   }
   render(){
-    
+
     return (
       <Menu borderless inverted attached='bottom'>
         {this.renderColor()}
