@@ -27,10 +27,15 @@ class AddNote extends Component {
     }
   }
 
+  // getNoteColor(noteInputColor){
+  //   this.props.getNoteColorValue(noteInputColor)
+  // }
+
 
   render(){
 
     const {activeItem,loadColor} = this.state
+    //const {noteColorValue} = this.props
     return (
         <Menu inverted borderless className='addNote'>
           <Menu.Item name='plus' active={activeItem === 'plus'} onClick={this.handleItemClick.bind(this)} >

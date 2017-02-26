@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
+import { Boards } from '../../collections/Boards'
+import {createContainer} from 'meteor/react-meteor-data';
 
 
 class NoteColor extends Component {
+
+  // sendNoteColor(color){
+  //   this.props.getNoteColor(color)
+  // }
 
   renderColor() {
     const {loadColor} = this.props
@@ -12,11 +18,24 @@ class NoteColor extends Component {
       return (
         colors.map(color => (
           <Menu.Item>
-            <Segment inverted color={color}></Segment>
+            <Segment inverted color={color} ></Segment>
           </Menu.Item>
         ))
       )
     }
+
+    // if(loadColor) {
+    //   return this.props.boards.map(board => {
+    //     return board.noteColors.map(color => {
+    //       return (
+    //         <Menu.Item>
+    //           <Segment inverted color={color} onClick={this.sendNoteColor.bind(this,color)}></Segment>
+    //         </Menu.Item>
+    //       )
+    //     })
+    //   })
+    //
+    // }
   }
   render(){
 
@@ -29,4 +48,7 @@ class NoteColor extends Component {
 
 }
 
-export default NoteColor;
+export default createContainer((props) => {
+  Meteor.subscribe('boards');
+  return {boards: Boards.find({}).fetch()};
+}, NoteColor)

@@ -8,6 +8,7 @@ if (Meteor.isServer) {
       Boards.insert({
         createdAt: new Date(),
         boardName: boardName,
+        noteColors: ['pink', 'teal', 'olive', 'yellow'],
         notes: [],
         sharedWith: [],
         ownerId: this.userId

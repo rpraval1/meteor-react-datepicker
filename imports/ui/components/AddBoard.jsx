@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Container, Header, Icon, Menu, Modal, Segment } from 'semantic-ui-react'
 import BoardContent from './BoardContent'
-//import CreateBoard from './CreateBoard'
+import AddNote from './AddNote'
 import MyBoardsList from './MyBoardsList'
 
 class AddBoard extends Component {
@@ -86,7 +86,10 @@ class AddBoard extends Component {
           </Menu.Item>
           <MyBoardsList boardContent={boardContent} boardContentValue={this.boardContentValue.bind(this)}/>
         </Menu>
-        <Segment attached='bottom'><BoardContent boardContent={boardContent}/></Segment>
+        <Segment attached='bottom'>
+          <BoardContent boardContent={boardContent}/>
+          {boardContent ? <AddNote /> : ''}
+        </Segment>
       </Container>
     );
   }
