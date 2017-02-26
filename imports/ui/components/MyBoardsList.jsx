@@ -18,7 +18,7 @@ class MyBoardsList extends Component {
     this.setState({
       activeItem: boardName,
     })
-    this.props.boardContentValue(boardId)
+    this.props.boardContentValue(boardId,'')
   }
 
   renderBoards(){

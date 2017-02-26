@@ -26,8 +26,7 @@ class AddBoard extends Component {
     this.state = {
       modalOpen: false,
       boardContent: '',
-      noteColorValue: '',
-      defaultColor: ''
+      noteColorValue: ''
     }
   }
 
@@ -37,9 +36,10 @@ class AddBoard extends Component {
     })
   }
 
-  boardContentValue(boardClickedVaue){
+  boardContentValue(boardClickedVaue, noteColorValue){
     this.setState({
-      boardContent: boardClickedVaue
+      boardContent: boardClickedVaue,
+      noteColorValue
     })
   }
 
@@ -92,11 +92,11 @@ class AddBoard extends Component {
               </Modal.Actions>
             </Modal>
           </Menu.Item>
-          <MyBoardsList boardContent={boardContent} boardContentValue={this.boardContentValue.bind(this)}/>
+          <MyBoardsList boardContent={boardContent} noteColorValue={noteColorValue} boardContentValue={this.boardContentValue.bind(this)}/>
         </Menu>
         <Segment attached='bottom'>
           <BoardContent boardContent={boardContent} noteColorValue={noteColorValue} />
-          {boardContent ? <AddNote boardContent={boardContent} noteColorValue={noteColorValue} getNoteColorValue={this.getNoteColorValue.bind(this)}/> : ''}
+          {boardContent ? <AddNote boardContent={boardContent} getNoteColorValue={this.getNoteColorValue.bind(this)}/> : ''}
         </Segment>
       </Container>
     );
