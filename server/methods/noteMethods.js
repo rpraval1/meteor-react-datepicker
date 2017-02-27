@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
-import {Boards} from '../../imports/collections/Boards';
+import {Notes} from '../../imports/collections/Notes';
 
 if (Meteor.isServer) {
   Meteor.methods({
-    'boards.insert': function(boardName) {
+    'notes.insert': function(boardId,color) {
 
-      Boards.insert({
-        boardName: boardName,
+      Notes.insert({
+        boardId: boardId,
+        color: color,
         ownerId: this.userId
       },function(error, result) {
         if(error){
@@ -16,12 +17,12 @@ if (Meteor.isServer) {
 
     },
 
-    'boards.remove': function(boardId) {
-      //return Boards.remove(board);
+    'notes.remove': function(noteId) {
+      //return Notes.remove(noteId);
 
-      Boards.remove(
+      Notes.remove(
         {
-          _id: boardId
+          _id: noteId
         },function(error, result) {
           if(error){
             console.log(error);
@@ -31,15 +32,15 @@ if (Meteor.isServer) {
 
     },
 
-    'boards.update': function(boardId, boardName) {
-      //return Boards.update(board._id, { $set: { notes } });
+    'notes.update': function(noteId, content) {
+      //return Notes.update(note._id, { $set: { notes } });
 
-      Boards.update(
+      Notes.update(
         {
-          _id: boardId
+          _id: noteId
         },{
           $set: {
-            boardName
+            content
           }
         },function(error, result) {
           if(error){
@@ -47,7 +48,6 @@ if (Meteor.isServer) {
           }
         }
       )
-
     },
 
     // 'boards.share': function(board, email) {

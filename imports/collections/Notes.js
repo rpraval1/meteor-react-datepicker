@@ -1,25 +1,24 @@
 import { Mongo } from 'meteor/mongo';
 
 
-export const Boards = new Mongo.Collection('boards');
+export const Notes = new Mongo.Collection('notes');
 
 
 var Schemas = {};
 
-Schemas.Boards = new SimpleSchema({
-    boardName: {
+Schemas.Notes = new SimpleSchema({
+    boardId: {
         type: String,
-        label: "Board Name",
-        max: 20
+        label: "Boards Id"
     },
-    sharedWith: {
-        type: Array,
-        label: "Email of Users",
+    color: {
+        type: String,
+        label: "Color of a Note"
+    },
+    content: {
+        type: String,
+        label: "Note Content",
         optional: true
-    },
-    'sharedWith.$': {
-        type: String,
-        regEx: SimpleSchema.RegEx.Email
     },
     ownerId: {
         type: String,
@@ -51,4 +50,4 @@ Schemas.Boards = new SimpleSchema({
     },
 });
 
-Boards.attachSchema(Schemas.Boards);
+Notes.attachSchema(Schemas.Notes);

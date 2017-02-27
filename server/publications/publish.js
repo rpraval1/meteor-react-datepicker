@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check'
 import {Boards} from '../../imports/collections/Boards';
+import {Notes} from '../../imports/collections/Notes';
 
 if (Meteor.isServer) {
 
@@ -52,6 +53,13 @@ if (Meteor.isServer) {
     return Boards.find({ownerId: this.userId});
   });
 
+  Meteor.publish('notes', function() {
+    return Notes.find({ownerId: this.userId});
+  });
+
+  Meteor.publish('board-notes', function(boardId) {
+    return Notes.find({ownerId: this.userId, boardId});
+  });
 
 
 

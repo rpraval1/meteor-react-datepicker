@@ -14,6 +14,7 @@ class AddNote extends Component {
   handleItemClick(e, { name }){
 
     const {loadColor} = this.state
+
     if(loadColor) {
       this.setState({
         activeItem: name,
@@ -27,7 +28,13 @@ class AddNote extends Component {
   }
 
   getNoteColor(noteInputColor){
-    this.props.getNoteColorValue(noteInputColor)
+    //this.props.getNoteColorValue(noteInputColor)
+    const {boardId} = this.props
+    Meteor.call('notes.insert', boardId, noteInputColor, (error, result) => {
+      if(error){
+        console.log(error)
+      }
+    })
   }
 
   renderColor() {
@@ -48,7 +55,7 @@ class AddNote extends Component {
   render(){
 
     const {activeItem, loadColor} = this.state
-    const {boardContent} = this.props
+    const {boardId} = this.props
     return (
         <Menu inverted borderless className='addNote'>
           <Menu.Item name='plus' active={activeItem === 'plus'} onClick={this.handleItemClick.bind(this)} >

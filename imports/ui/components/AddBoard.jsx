@@ -25,8 +25,8 @@ class AddBoard extends Component {
 
     this.state = {
       modalOpen: false,
-      boardContent: '',
-      noteColorValue: ''
+      boardId: ''
+      //noteColorValue: ''
     }
   }
 
@@ -36,18 +36,18 @@ class AddBoard extends Component {
     })
   }
 
-  boardContentValue(boardClickedVaue, noteColorValue){
+  boardContentValue(boardClickedVaue){
     this.setState({
-      boardContent: boardClickedVaue,
-      noteColorValue
+      boardId: boardClickedVaue
+      //noteColorValue
     })
   }
 
-  getNoteColorValue(noteInputColor){
-    this.setState({
-      noteColorValue: noteInputColor
-    })
-  }
+  // getNoteColorValue(noteInputColor){
+  //   this.setState({
+  //     noteColorValue: noteInputColor
+  //   })
+  // }
 
   handleClose(){
 
@@ -57,7 +57,7 @@ class AddBoard extends Component {
           console.log(error)
         }
         else{
-          console.log("yippee added")
+          console.log("Board Name added")
         }
       });
       this.setState({
@@ -69,7 +69,7 @@ class AddBoard extends Component {
   //   <Icon name='plus'></Icon>
   render() {
 
-    const {modalOpen, boardContent, noteColorValue} = this.state
+    const {modalOpen, boardId} = this.state
 
     return(
       <Container fluid>
@@ -92,11 +92,11 @@ class AddBoard extends Component {
               </Modal.Actions>
             </Modal>
           </Menu.Item>
-          <MyBoardsList boardContent={boardContent} noteColorValue={noteColorValue} boardContentValue={this.boardContentValue.bind(this)}/>
+          <MyBoardsList boardId={boardId} boardContentValue={this.boardContentValue.bind(this)}/>
         </Menu>
         <Segment attached='bottom'>
-          <BoardContent boardContent={boardContent} noteColorValue={noteColorValue} />
-          {boardContent ? <AddNote boardContent={boardContent} getNoteColorValue={this.getNoteColorValue.bind(this)}/> : ''}
+          <BoardContent boardId={boardId} />
+          {boardId ? <AddNote boardId={boardId} /> : ''}
         </Segment>
       </Container>
     );
