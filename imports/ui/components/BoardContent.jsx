@@ -1,26 +1,67 @@
 import React, { Component } from 'react'
 import { createContainer } from 'meteor/react-meteor-data';
-import { Container, Card } from 'semantic-ui-react'
+import { Button, Container, Card, Grid } from 'semantic-ui-react'
 import { Notes } from '../../collections/Notes'
 import { Boards } from '../../collections/Boards'
+import Draggable from 'react-draggable'
 
 class BoardContent extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      displayTextArea: ''
+    }
+  }
 
-  // constructor(props){
-  //   super(props)
-  //   this.state = {
-  //     noteColorValue: ''
-  //   }
-  // }
-  //
+  toDisplayTextArea(noteId){
+    this.setState({
+      displayTextArea: noteId
+    })
+  }
+
+  saveNote(noteId){
+    Meteor.call('notes.update', noteId, this.refs.newText.value, (error,result) => {
+      if(error){
+        console.log(error)
+      }
+    })
+
+    this.setState({
+      displayTextArea: ''
+    })
+  }
+
   renderNotes(){
+
+    const {displayTextArea} = this.state
 
     return this.props.notes.map(note => {
       return (
-        <Card key={note._id} color={note.color}>
-          <h2>{note._id}</h2>
-          <h2>{note.color}</h2>
-        </Card>
+        <Grid.Column>
+          <Card key={note._id} color={note.color}>
+            <Card.Header>
+              <Button icon='close' floated='right' basic color='red'></Button>
+            </Card.Header>
+            <Card.Content onClick={this.toDisplayTextArea.bind(this,note._id)}>
+              {
+                displayTextArea==note._id
+                ?
+                <textarea ref="newText"></textarea>
+                  :
+                <h2>{note.content ? note.content : 'Start wrtiting'}</h2>
+              }
+            </Card.Content>
+            <Card.Content extra>
+              {
+                displayTextArea==note._id
+                ?
+                <Button basic color='blue' onClick={this.saveNote.bind(this, note._id)}>Save</Button>
+                :
+                ''
+              }
+            </Card.Content>
+          </Card>
+        </Grid.Column>
       )
     })
   }
@@ -31,7 +72,9 @@ class BoardContent extends Component {
     //console.log(notes);
     return (
       <Container fluid className='boardContent'>
-        {this.renderNotes()}
+        <Grid columns={6}>
+          {this.renderNotes()}
+        </Grid>
       </Container>
     );
   }
