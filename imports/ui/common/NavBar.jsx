@@ -95,10 +95,10 @@ class NavBar extends Component{
     <div>
       { loginToken ?
         <Menu className="navbar">
-          <Menu.Item href={Meteor.absoluteUrl()}>
+          <Menu.Item href={Meteor.absoluteUrl()} className='navbarContent'>
             BulletinBoard
           </Menu.Item>
-          <Menu.Item href={Meteor.absoluteUrl('myboards')} name='MyBoards' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
+          <Menu.Item className="navbarContent" href={Meteor.absoluteUrl('myboards')} name='MyBoards' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
         <Menu.Menu position='right'>
             {isUserAdmin ?
               <Menu.Item >
@@ -136,7 +136,7 @@ class NavBar extends Component{
       </Menu>
          :
          <Menu className="navbar">
-           <Menu.Item>
+           <Menu.Item className="navbarContent">
              BulletinBoard
            </Menu.Item>
            <Menu.Menu position='right'>

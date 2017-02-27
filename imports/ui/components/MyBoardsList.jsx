@@ -51,7 +51,7 @@ class MyBoardsList extends Component {
       return (
         <Menu.Item key={board._id} name={board.boardName} active={activeItem === board.boardName} onClick={this.handleItemClick.bind(this, board.boardName, board._id)}>
           {board.boardName}
-          <Button icon color='black' size='tiny'><Icon name='delete'></Icon></Button>
+          <Button icon='close' className='btn-small btn-olive'></Button>
         </Menu.Item>
       )
     })

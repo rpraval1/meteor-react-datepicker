@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon, Menu, Segment } from 'semantic-ui-react'
+import { Container, Icon, Menu, Segment } from 'semantic-ui-react'
 
 class AddNote extends Component {
 
@@ -44,8 +44,8 @@ class AddNote extends Component {
     if(loadColor){
       return (
         colors.map(color => (
-          <Menu.Item>
-            <Segment inverted color={color} onClick={this.getNoteColor.bind(this,color)} ></Segment>
+          <Menu.Item key={color}>
+            <Segment inverted key={color} color={color} onClick={this.getNoteColor.bind(this,color)} ></Segment>
           </Menu.Item>
         ))
       )
@@ -57,12 +57,14 @@ class AddNote extends Component {
     const {activeItem, loadColor} = this.state
     const {boardId} = this.props
     return (
-        <Menu inverted borderless className='addNote'>
-          <Menu.Item name='plus' active={activeItem === 'plus'} onClick={this.handleItemClick.bind(this)} >
-            {loadColor ? <Icon name='minus'></Icon> : <Icon name='plus'></Icon>}
-          </Menu.Item>
-          {this.renderColor()}
-        </Menu>
+        <Container fluid className='btn-note'>
+          <Menu inverted borderless className='addNote'>
+            <Menu.Item key='plus' name='plus' active={activeItem === 'plus'} onClick={this.handleItemClick.bind(this)} >
+              {loadColor ? <Icon name='minus'></Icon> : <Icon name='plus'></Icon>}
+            </Menu.Item>
+            {this.renderColor()}
+          </Menu>
+        </Container>
     );
   }
 }

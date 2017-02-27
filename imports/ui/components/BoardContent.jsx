@@ -31,22 +31,31 @@ class BoardContent extends Component {
     })
   }
 
+  deleteNote(noteId){
+    Meteor.call('notes.remove', noteId, (error,result) => {
+      if(error){
+        console.log(error)
+      }
+    })
+  }
+
   renderNotes(){
 
     const {displayTextArea} = this.state
 
     return this.props.notes.map(note => {
       return (
-        <Grid.Column>
+        <Grid.Column key={note._id}>
           <Card key={note._id} color={note.color}>
             <Card.Header>
-              <Button icon='close' floated='right' basic color='red'></Button>
+              <Button icon='close' size='mini' floated='right' color='red' onClick={this.deleteNote.bind(this, note._id)} ></Button>
+              <Button icon='edit' size='mini' floated='right' color='blue' onClick={this.toDisplayTextArea.bind(this,note._id)}></Button>
             </Card.Header>
             <Card.Content onClick={this.toDisplayTextArea.bind(this,note._id)}>
               {
                 displayTextArea==note._id
                 ?
-                <textarea ref="newText"></textarea>
+                <textarea ref="newText" defaultValue={note.content}></textarea>
                   :
                 <h2>{note.content ? note.content : 'Start wrtiting'}</h2>
               }

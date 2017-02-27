@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import {Notes} from '../../imports/collections/Notes';
+import { Boards } from '../../imports/collections/Boards'
 
 if (Meteor.isServer) {
   Meteor.methods({
@@ -49,6 +50,29 @@ if (Meteor.isServer) {
         }
       )
     },
+
+    'boards-summary': function(){
+      var user = Meteor.users.findOne({_id:this.userId});
+      if(user){
+        var rawBoards = Boards.rawCollection();
+         var aggregateQuery = Meteor.wrapAsync(rawBoards.aggregate, rawBoards);
+         var pipeline = [
+             {$lookup:
+               {
+                 from: "notes",
+                 localField: "_id",
+                 foreignField: "boardId",
+                 as: "boardNotes"
+               }
+             }
+         ];
+         var results = aggregateQuery(pipeline);
+
+        //console.log(results);
+
+        return results
+    }
+  }
 
     // 'boards.share': function(board, email) {
     //   return Boards.update(board._id, { $push: { sharedWith: email }});
