@@ -46,7 +46,7 @@ class BoardContent extends Component {
     return this.props.notes.map(note => {
       return (
         <Grid.Column key={note._id}>
-          <Card key={note._id} color={note.color}>
+          <Card key={note._id} color={note.color} raised>
             <Card.Header>
               <Button icon='close' size='mini' floated='right' color='red' onClick={this.deleteNote.bind(this, note._id)} ></Button>
               <Button icon='edit' size='mini' floated='right' color='blue' onClick={this.toDisplayTextArea.bind(this,note._id)}></Button>
@@ -57,7 +57,7 @@ class BoardContent extends Component {
                 ?
                 <textarea ref="newText" defaultValue={note.content}></textarea>
                   :
-                <h2>{note.content ? note.content : 'Start wrtiting'}</h2>
+                <h3>{note.content ? note.content : 'Start wrtiting'}</h3>
               }
             </Card.Content>
             <Card.Content extra>

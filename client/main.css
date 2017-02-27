@@ -5,7 +5,9 @@
   padding-left: 20px;
 
 }
-
+/*.{note.color} {
+  background-color: note.color;
+}*/
 .navbarContent{
   font-size: 18px;
   font-weight: bold;
