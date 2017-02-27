@@ -57,6 +57,11 @@ if (Meteor.isServer) {
         var rawBoards = Boards.rawCollection();
          var aggregateQuery = Meteor.wrapAsync(rawBoards.aggregate, rawBoards);
          var pipeline = [
+            {
+              $match: {
+                ownerId: this.userId
+              }
+            },
              {$lookup:
                {
                  from: "notes",

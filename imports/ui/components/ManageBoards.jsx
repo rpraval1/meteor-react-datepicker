@@ -50,34 +50,45 @@ class ManageBoards extends Component {
   // }
 
   deleteBoard(boardId){
-    Meteor.call('boards.remove', boardId, (error, result) => {
+    Meteor.call('boards.remove', boardId, (error, boards) => {
       if(error)
         console.log(error);
+      else {
+        //console.log(boards);
+        this.setState({
+          boards
+        })
+      }
     })
   }
 
   toDisplayTextArea(boardId){
-    alert("you hit edit")
+    //alert("you hit edit")
     this.setState({
       displayTextArea: boardId
     })
   }
 
   saveBoard(boardId){
-    alert('you hit save button')
-    Meteor.call('boards.update', boardId, this.refs.boardName.value, (error, result) => {
+    //alert('you hit save button')
+    Meteor.call('boards.update', boardId, this.refs.boardName.value, (error, boards) => {
       if(error)
         console.log(error);
+      else {
+        //console.log(boards);
+        this.setState({
+          displayTextArea: "",
+          boards
+        })
+      }
     })
-    this.setState({
-      displayTextArea: ''
-    })
+
   }
 
   generateBoardsAndNotes(){
     //const groupedNotes = _.groupBy(_.pluck(this.props.notes,'boardId'))
     const {boards,displayTextArea} = this.state
-    console.log(boards);
+    //console.log(allboards);
     return boards.map(board => {
       return (
         <Grid.Column key={board._id}>
@@ -130,7 +141,7 @@ export default createContainer((props) => {
   //Meteor.subscribe('board-notes',boardId);
 
   return {
-    //boards: Boards.find({}).fetch()
+    //allboards: Boards.find({}).fetch()
     //notes: Notes.find({}).fetch()
   };
 }, ManageBoards)

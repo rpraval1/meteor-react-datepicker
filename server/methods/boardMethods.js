@@ -29,6 +29,8 @@ if (Meteor.isServer) {
         }
       )
 
+      return Meteor.call("boards-summary")
+
     },
 
     'boards.update': function(boardId, boardName) {
@@ -48,11 +50,16 @@ if (Meteor.isServer) {
         }
       )
 
+      //return Boards.find({ownerId:this.userId}).fetch()
+      return Meteor.call("boards-summary")
+
     },
+
 
     // 'boards.share': function(board, email) {
     //   return Boards.update(board._id, { $push: { sharedWith: email }});
     // }
   });
+
 
 }

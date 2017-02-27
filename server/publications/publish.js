@@ -69,28 +69,12 @@ if (Meteor.isServer) {
       return Notes.find({ownerId: this.userId, boardId});
   });
 
-  // Meteor.publish('boards-summary', function(){
-  //   var user = Meteor.users.findOne({_id:this.userId});
-  //   if(user){
-  //     var rawBoards = Boards.rawCollection();
-  //      var aggregateQuery = Meteor.wrapAsync(rawBoards.aggregate, rawBoards);
-  //      var pipeline = [
-  //          {$lookup:
-  //            {
-  //              from: "notes",
-  //              localField: "_id",
-  //              foreignField: "boardId",
-  //              as: "boardNotes"
-  //            }
-  //          }
-  //      ];
-  //      var results = aggregateQuery(pipeline);
-  //
-  //     console.log(results);
-  //
-  //     return results
-  //     }
-  // 
-  // });
+  Meteor.publish('boards-summary', function(){
+    var user = Meteor.users.findOne({_id:this.userId});
+    if(user){
+        return Boards.find({ownerId: this.userId})
+      }
+
+  });
 
 }
