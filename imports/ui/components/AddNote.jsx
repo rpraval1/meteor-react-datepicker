@@ -39,7 +39,7 @@ class AddNote extends Component {
 
   renderColor() {
     const {loadColor} = this.state
-    const colors = ['pink', 'teal', 'olive', 'yellow']
+    const colors = ['grey', 'teal', 'olive', 'yellow']
 
     if(loadColor){
       return (

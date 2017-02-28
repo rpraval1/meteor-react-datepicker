@@ -1,13 +1,25 @@
 .boardContent {
   height: 100vh;
   /*min-height: 550px;*/
-  background-color: #a58975;
+  background-color: #637A80;
   padding-left: 20px;
 
+}
+
+.landingStyle {
+  padding-top: 300px;
+  margin: auto;
 }
 /*.{note.color} {
   background-color: note.color;
 }*/
+
+.registerCard {
+  background: url(/img/features/background.png) no-repeat center center fixed!important;
+  height: 262px;
+  padding-left: 45px!important;
+  padding-top: 100px!important;
+}
 .navbarContent{
   font-size: 18px;
   font-weight: bold;
@@ -35,4 +47,25 @@
 
 .btn-olive {
   color: #B5CC18!important;
+}
+
+
+.bg-yellow{
+  background-color: #FBBD08!important
+}
+
+.bg-pink{
+  background-color: #FFFFFF!important
+}
+
+.bg-olive{
+  background-color: #B5CC18!important
+}
+
+.bg-teal{
+  background-color: #00B5AD!important
+}
+
+.bg-grey{
+  background-color: #FFFFFF!important
 }
