@@ -1,29 +1,42 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 
-
-export const Boards = new Mongo.Collection('boards');
-
+export const ExampleForm = new Mongo.Collection('exampleforms');
 
 var Schemas = {};
 
-Schemas.Boards = new SimpleSchema({
-    boardName: {
+Schemas.ExampleForm = new SimpleSchema({
+    firstName: {
         type: String,
-        label: "Board Name",
-        max: 20
+        label: "First Name"
     },
-    sharedWith: {
-        type: Array,
-        label: "Email of Users",
-        optional: true
-    },
-    'sharedWith.$': {
+    lastName: {
         type: String,
-        regEx: SimpleSchema.RegEx.Email
+        label: "Last Name"
     },
-    ownerId: {
+    gender: {
         type: String,
-        label: "Current User"
+        label: "Gender"
+    },
+    homePhone: {
+        type: String,
+        label: "Home Phone"
+    },
+    companyName: {
+        type: String,
+        label: "Company Name"
+    },
+    companyAddress: {
+        type: String,
+        label: "Company Address"
+    },
+    workPhone: {
+        type: String,
+        label: "Work Phone"
+    },
+    aboutYou: {
+        type: String,
+        label: "About You"
     },
     createdAt: {
       type: Date,
@@ -51,4 +64,4 @@ Schemas.Boards = new SimpleSchema({
     },
 });
 
-Boards.attachSchema(Schemas.Boards);
+ExampleForm.attachSchema(Schemas.ExampleForm);
