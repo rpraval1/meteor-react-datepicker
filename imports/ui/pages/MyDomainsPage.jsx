@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ManageBoards from '../components/ManageBoards'
 
-class MyBoardsPage extends Component {
+class MyDomainsPage extends Component {
   render() {
     return (
       <ManageBoards />
@@ -9,4 +9,4 @@ class MyBoardsPage extends Component {
   }
 }
 
-export default MyBoardsPage;
+export default MyDomainsPage;

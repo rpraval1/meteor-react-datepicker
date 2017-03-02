@@ -4,6 +4,7 @@ import { Accounts } from 'meteor/accounts-base';
 import { check } from 'meteor/check'
 import {Boards} from '../../imports/collections/Boards';
 import {Notes} from '../../imports/collections/Notes';
+import {Domains} from '../../imports/collections/Domains';
 
 if (Meteor.isServer) {
 
@@ -74,6 +75,13 @@ if (Meteor.isServer) {
     if(user){
         return Boards.find({ownerId: this.userId})
       }
+
+  });
+  Meteor.publish('domains', function() {
+    var user = Meteor.users.findOne({_id:this.userId});
+    if(user)
+      return Domains.find({ownerId: this.userId});
+
 
   });
 

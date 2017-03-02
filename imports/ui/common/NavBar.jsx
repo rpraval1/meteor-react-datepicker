@@ -96,9 +96,9 @@ class NavBar extends Component{
       { loginToken ?
         <Menu className="navbar">
           <Menu.Item href={Meteor.absoluteUrl()} className='navbarContent'>
-            BulletinBoard
+            ThoughtLinks
           </Menu.Item>
-          <Menu.Item className="navbarContent" href={Meteor.absoluteUrl('myboards')} name='MyBoards' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
+          <Menu.Item className="navbarContent" href={Meteor.absoluteUrl('mydomains')} name='MyDomains' active={activeItem === 'features'} onClick={this.handleItemClick.bind(this)} />
         <Menu.Menu position='right'>
             {isUserAdmin ?
               <Menu.Item >
@@ -110,6 +110,7 @@ class NavBar extends Component{
                     <Dropdown.Divider />
                     <Dropdown.Item href={Meteor.absoluteUrl('manage/users')}>Manage Users</Dropdown.Item>
                     <Dropdown.Item href={Meteor.absoluteUrl('manage/roles')}>Manage Roles</Dropdown.Item>
+                    <Dropdown.Item href={Meteor.absoluteUrl('manage/domains')}>Manage Domains</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </Menu.Item>
@@ -137,7 +138,7 @@ class NavBar extends Component{
          :
          <Menu className="navbar">
            <Menu.Item className="navbarContent">
-             BulletinBoard
+             ThoughtLinks
            </Menu.Item>
            <Menu.Menu position='right'>
          <Menu.Item href='/signup' name='signup' active={activeItem === 'signup'} onClick={this.handleItemClick.bind(this)}>
