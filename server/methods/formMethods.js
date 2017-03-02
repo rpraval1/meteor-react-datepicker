@@ -6,7 +6,7 @@ if(Meteor.isServer) {
 
     'exampleforms.save': function(formData){
 
-      console.log(formData);
+      //console.log(formData);
 
       ExampleForm.insert({
         firstName: formData.firstName,

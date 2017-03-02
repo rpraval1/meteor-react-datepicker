@@ -23,7 +23,7 @@ class CreateForm extends Component{
   handleSubmit(e,{formData}){
     e.preventDefault();
     this.setState({loading: true})
-    console.log(formData);
+    //console.log(formData);
     //validate
     Meteor.call('exampleforms.save', formData, function(error){
       if(error){
