@@ -19,7 +19,7 @@ Schemas.ExampleForm = new SimpleSchema({
         label: "Gender"
     },
     homePhone: {
-        type: String,
+        type: SimpleSchema.Integer,
         label: "Home Phone"
     },
     companyName: {
@@ -31,7 +31,7 @@ Schemas.ExampleForm = new SimpleSchema({
         label: "Company Address"
     },
     workPhone: {
-        type: String,
+        type: SimpleSchema.Integer,
         label: "Work Phone"
     },
     aboutYou: {

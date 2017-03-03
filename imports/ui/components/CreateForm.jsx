@@ -69,13 +69,13 @@ class CreateForm extends Component{
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Select id='gender' name='gender' label='Gender' options={options} placeholder='Gender' required/>
-            <Form.Input id='homePhone' name='homePhone' label='Home Phone' placeholder='Home Phone' required type='text'/>
+            <Form.Input id='homePhone' name='homePhone' label='Home Phone' placeholder='Home Phone' required />
           </Form.Group>
           <Form.Group widths='equal'>
             <Form.Input id='companyName' name='companyName' label='Company Name' placeholder='Company Name' required type='text'/>
             <Form.Input id='companyAddress' name='companyAddress' label='Comapny Address' placeholder='Comapny Address' required type='text'/>
           </Form.Group>
-          <Form.Input id='workPhone' name='workPhone' label='Work Phone' placeholder='Work Phone' required type='text'/>
+          <Form.Input id='workPhone' name='workPhone' label='Work Phone' placeholder='Work Phone' required />
           <Form.TextArea id='aboutYou' name='aboutYou' label='About' placeholder='Tell us more about you...' required type='text'/>
           <Form.Group>
             <Button primary type='submit'>Submit</Button>

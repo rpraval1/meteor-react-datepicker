@@ -31,8 +31,8 @@ class ManageData extends Component{
 
   saveEditData(formId,e, {formData}){
     e.preventDefault();
-    console.log(formId)
-    console.log(formData)
+    //console.log(formId)
+    //console.log(formData)
     Meteor.call('exampleforms.update', formId, formData, (error,result) => {
       if(error){
         console.log(error);
@@ -59,48 +59,6 @@ class ManageData extends Component{
   }
 
 
-
-  // renderEditDataMode(){
-  //   const {formdata} = this.props
-  //
-  //   return (
-  //       <Table.Body>
-  //         {formdata.map(form => (
-  //           <Table.Row as='form' key={form._id} onSubmit={this.saveEditData.bind(this, form._id)}>
-  //             <Table.Cell>
-  //               <Form.Input name="firstName" transparent  defaultValue ={form.firstName}/>
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="lastName" transparent  defaultValue ={form.lastName}/>
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="gender" transparent  defaultValue ={form.gender} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="homePhone" transparent  defaultValue ={form.homePhone} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="companyName" transparent  defaultValue ={form.companyName} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="companyAddress" transparent  defaultValue ={form.companyAddress} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="workPhone" transparent  defaultValue ={form.workPhone} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Input name="aboutYou" transparent  defaultValue ={form.aboutYou} />
-  //             </Table.Cell>
-  //             <Table.Cell>
-  //               <Form.Button type='submit' >Save</Form.Button>
-  //             </Table.Cell>
-  //           </Table.Row>
-  //         ))}
-  //       </Table.Body>
-  //   )
-  //
-  // }
-
   renderRetrieveDataMode(){
     const {formdata} = this.props
     const {modalId} = this.state
@@ -118,7 +76,7 @@ class ManageData extends Component{
           <Table.Cell>{form.aboutYou}</Table.Cell>
           <Table.Cell>
               <Modal
-                trigger={<Button onClick={this.handleItemClick.bind(this, form._id)}>Edit</Button>}
+                trigger={<Button onClick={this.handleItemClick.bind(this, form._id)} color='teal'>Edit</Button>}
                 open={ modalId == form._id ? true : false}
                 onClose={this.handleClose}
                 size='small'
@@ -176,7 +134,7 @@ class ManageData extends Component{
         </Header>
         <Segment raised>
 
-          <Table color='blue' >
+          <Table color='purple' celled padded>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>First Name</Table.HeaderCell>
