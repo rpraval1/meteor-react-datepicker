@@ -22,6 +22,18 @@ if(Meteor.isServer) {
           console.log(error);
         }
       });
+    },
+
+    'exampleforms.remove': function(formId) {
+      //return Boards.remove(board);
+      ExampleForm.remove({
+        _id: formId
+      },function(error, result) {
+        if(error){
+          console.log(error);
+        }
+      });
+
     }
   });
 }

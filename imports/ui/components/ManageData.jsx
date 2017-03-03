@@ -7,6 +7,17 @@ import { ExampleForm } from '../../collections/ExampleForm'
 
 class ManageData extends Component{
 
+  removeFormData(formId){
+
+    Meteor.call('exampleforms.remove', formId, (error,result) => {
+      if(error){
+        console.log(error);
+      }else{
+        console.log('removed successfully');
+      }
+    });
+  }
+
   render(){
     const {formdata} = this.props
     return(
@@ -50,7 +61,7 @@ class ManageData extends Component{
                 <Table.Cell>{form.aboutYou}</Table.Cell>
                 <Table.Cell>
                   <Button>Edit</Button>
-                  <Button>Delete</Button>
+                  <Button color='red' onClick={this.removeFormData.bind(this, form._id)}>Delete</Button>
                 </Table.Cell>
                 </Table.Row>
               ))}
