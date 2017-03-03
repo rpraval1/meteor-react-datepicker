@@ -14,7 +14,6 @@ class ManageData extends Component{
   constructor(props){
     super(props)
     this.state = {
-      modalOpen: false,
       modalId: ""
     }
   }
@@ -39,20 +38,23 @@ class ManageData extends Component{
         console.log(error);
       }else{
         console.log('updated successfully');
+        this.setState({
+          modalId: ""
+        })
       }
+
     });
   }
 
   handleItemClick(modalId){
     this.setState({
-      modalId,
-      modalOpen: true
+      modalId
     })
   }
 
   handleClose(){
     this.setState({
-      modalOpen: false
+      modalId: ""
     })
   }
 
@@ -101,7 +103,7 @@ class ManageData extends Component{
 
   renderRetrieveDataMode(){
     const {formdata} = this.props
-    const {modalId,modalOpen} = this.state
+    const {modalId} = this.state
     return(
       <Table.Body>
         {formdata.map(form => (
