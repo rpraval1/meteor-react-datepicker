@@ -53,14 +53,37 @@ class DateInput extends Component{
       * moment().toString() is used to convert moment date object to string
       * React do not encourage rendering objects directly in jsx
       */
-      return (
-        <Message key={date._id} onDismiss={this.handleDismiss.bind(this, date._id)}>
-          <Message.Header>Selected Date : {moment(date.myDate).toString()}</Message.Header>
-          <Message.List>
-            <Message.Item>After Removing Timestamp : {moment(date.myDate).format('LL').toString()}</Message.Item>
-          </Message.List>
-        </Message>
-      )
+      if (moment(date.myDate).format('YYYY-MM-DD') == moment.utc().format('YYYY-MM-DD')) {
+        return (
+          <Message key={date._id} onDismiss={this.handleDismiss.bind(this, date._id)}>
+            <Message.Header>Selected Date : {moment.utc().toString()}</Message.Header>
+            <Message.List>
+              <Message.Item>Date and Time : {moment.utc().format('LLLL')}</Message.Item>
+              <Message.Item>Calendar Date : {moment.utc().format('LL')}</Message.Item>
+              <Message.Item>Day of the week : {moment.utc().format('dddd')}</Message.Item>
+              <Message.Item>{moment.utc().format('LTS')}</Message.Item>
+              <Message.Item>{moment.utc().format('l')}</Message.Item>
+              <Message.Item>{moment.utc().format('YYYY-MM-DD')}</Message.Item>
+            </Message.List>
+          </Message>
+        )
+      }
+      else{
+        return (
+          <Message key={date._id} onDismiss={this.handleDismiss.bind(this, date._id)}>
+            <Message.Header>Selected Date : {moment(date.myDate).toString()}</Message.Header>
+            <Message.List>
+              <Message.Item>Date and Time : {moment(date.myDate).format('LLLL')}</Message.Item>
+              <Message.Item>Calendar Date : {moment(date.myDate).format('LL')}</Message.Item>
+              <Message.Item>Day of the week : {moment(date.myDate).format('dddd')}</Message.Item>
+              <Message.Item>{moment(date.myDate).format('LTS')}</Message.Item>
+              <Message.Item>{moment(date.myDate).format('l')}</Message.Item>
+              <Message.Item>{moment(date.myDate).format('YYYY-MM-DD')}</Message.Item>
+            </Message.List>
+          </Message>
+        )
+      }
+
     })
   }
 
@@ -88,6 +111,8 @@ class DateInput extends Component{
             </Form.Group>
           </Form>
         </Segment>
+
+        {moment.utc().format('YYYY-MM-DD HH:mm:ss')}
 
         {this.renderSavedDates()}
 
