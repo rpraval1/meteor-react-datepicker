@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import {createContainer} from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor';
-import { Button, Container, Header, Form, Icon, Input, Segment } from 'semantic-ui-react'
+import { Button, Container, Header, Form, Icon, Input, Message, Segment } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 import moment from 'moment';
 import { Dates } from '../../collections/Dates'
@@ -35,8 +36,28 @@ class DateInput extends Component{
     });
   }
 
+  renderSavedDates(){
+    const {dates} = this.props
+
+    return dates.map(date => {
+      /***
+      * moment().toString() is used to convert moment date object to string
+      * React do not encourage rendering objects directly in jsx
+      */
+      return (
+        <Message key={date._id}>
+          <Message.Header>Selected Date : {moment(date.myDate).toString()}</Message.Header>
+          <Message.List>
+            <Message.Item>After Removing Timestamp : {moment(date.myDate).format('LL').toString()}</Message.Item>
+          </Message.List>
+        </Message>
+      )
+    })
+  }
+
   render(){
     const {inputDate} = this.state
+
     return(
       <Container>
         <Header as='h3'>
@@ -58,9 +79,17 @@ class DateInput extends Component{
             </Form.Group>
           </Form>
         </Segment>
+
+        {this.renderSavedDates()}
+
       </Container>
     );
   }
 }
 
-export default DateInput;
+export default createContainer((props) => {
+  Meteor.subscribe('getDates');
+  return {
+    dates: Dates.find({}).fetch()
+  };
+},DateInput);
