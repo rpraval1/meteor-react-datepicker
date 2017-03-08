@@ -1,10 +1,10 @@
 
 import { Meteor } from 'meteor/meteor';
-import { ExampleForm } from '../../imports/collections/ExampleForm'
+import { Dates } from '../../imports/collections/Dates'
 
 if (Meteor.isServer) {
-  Meteor.publish('get-all-data', function() {
-      return ExampleForm.find({});
+  Meteor.publish('getDates', function() {
+      return Dates.find({});
   });
 
 
