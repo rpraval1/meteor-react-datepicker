@@ -4,12 +4,12 @@ import { Dates } from '../../imports/collections/Dates'
 if(Meteor.isServer) {
   Meteor.methods({
 
-    'date.save': function(myDate){
+    'date.save': function(formData){
 
-      //console.log(formData);
+      console.log(formData.myDate);
 
       Dates.insert({
-        myDate: myDate
+        myDate: formData.myDate
       },function(error, result) {
         if(error){
           console.log(error);
@@ -29,7 +29,7 @@ if(Meteor.isServer) {
 
     },
 
-    'date.update': function(dateId, myDate) {
+    'date.update': function(dateId, formData) {
       //return Notes.update(note._id, { $set: { notes } });
 
       Dates.update(
@@ -37,7 +37,7 @@ if(Meteor.isServer) {
           _id: dateId
         },{
           $set: {
-            myDate: myDate
+            myDate: formData.myDate
           }
         },function(error, result) {
           if(error){

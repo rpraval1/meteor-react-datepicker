@@ -20,16 +20,19 @@ class DateInput extends Component{
     })
   }
 
-  saveDate(){
-    Meteor.call('date.save', this.refs.myDate.value, (error, result) => {
+  handleSubmit(e, {formData}){
+    e.preventDefault();
+    Meteor.call('date.save', formData, (error, result) => {
       if(error){
         console.log(error);
 
       }else{
         console.log(result);
         console.log("date inserted");
+        document.getElementById('addDate').reset();
       }
-    })
+
+    });
   }
 
   render(){
@@ -43,11 +46,17 @@ class DateInput extends Component{
           </Header.Content>
         </Header>
         <Segment raised>
-          <DatePicker
-            selected={inputDate}
-            ref= 'myDate'
-            onChange={this.handleinputDate.bind(this)} />
-          <Button onClick={this.saveDate.bind(this)}>Add</Button>
+          <Form id="addDate" onSubmit={this.handleSubmit.bind(this)}>
+            <Form.Group>
+              <Form.Input id='inputDate' label='Select a Date' required>
+                <DatePicker
+                  selected={inputDate}
+                  name='myDate'
+                  onChange={this.handleinputDate.bind(this)} />
+              </Form.Input>
+              <Button primary type='submit'>Select</Button>
+            </Form.Group>
+          </Form>
         </Segment>
       </Container>
     );
