@@ -10,7 +10,7 @@ class DateInput extends Component{
   constructor(props){
     super(props);
     this.state = {
-      inputDate: moment()
+      inputDate: ''
     };
   }
 
@@ -27,9 +27,9 @@ class DateInput extends Component{
         console.log(error);
 
       }else{
-        console.log(result);
-        console.log("date inserted");
-        document.getElementById('addDate').reset();
+        this.setState({
+          inputDate: ''
+        })
       }
 
     });
