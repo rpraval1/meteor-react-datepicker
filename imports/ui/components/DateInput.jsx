@@ -35,6 +35,15 @@ class DateInput extends Component{
 
     });
   }
+  handleDismiss(dateId){
+    Meteor.call('date.remove', dateId, (error, result) => {
+      if(error){
+        console.log(error);
+      }else{
+        console.log("removed Successfully");
+      }
+    })
+  }
 
   renderSavedDates(){
     const {dates} = this.props
@@ -45,7 +54,7 @@ class DateInput extends Component{
       * React do not encourage rendering objects directly in jsx
       */
       return (
-        <Message key={date._id}>
+        <Message key={date._id} onDismiss={this.handleDismiss.bind(this, date._id)}>
           <Message.Header>Selected Date : {moment(date.myDate).toString()}</Message.Header>
           <Message.List>
             <Message.Item>After Removing Timestamp : {moment(date.myDate).format('LL').toString()}</Message.Item>
