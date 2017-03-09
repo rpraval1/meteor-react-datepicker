@@ -124,6 +124,6 @@ class DateInput extends Component{
 export default createContainer((props) => {
   Meteor.subscribe('getDates');
   return {
-    dates: Dates.find({}).fetch()
+    dates: Dates.find({}, {sort: {createdAt: -1}}).fetch()
   };
 },DateInput);
